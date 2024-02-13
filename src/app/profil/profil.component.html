@@ -1,0 +1,92 @@
+<section id="about">
+    <div class="container">
+        <!--profil -->
+        <div style="text-align: center;">
+            <h2><u>Profile</u></h2>
+        </div>
+        <div class="row  flex-row-reverse">
+            <div class="col-lg-6 ">
+
+                <div class="about-text go-to">
+
+                    <div class="row about-list">
+
+                        <div class="col-md-6">
+
+                            <div class="media">
+                                <label>id</label>
+                                <p>{{id}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Nom</label>
+                                <p>{{nom}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Prénom</label>
+                                <p>{{prenom}}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="media">
+                                <label>Identifiant</label>
+                                <p>{{identifiant}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Naissance</label>
+                                <p>{{annee_naissance| date: 'dd-MM-yyyy'}}</p>
+                            </div>
+                            <div class="media">
+                                <label>Humeur</label>
+                                <p>{{humeur}}</p>
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="about-avatar">
+                    <img src={{avatar}} title="" alt="">
+                </div>
+                <div>
+                    <form methode='POST' class="form" name="form" #formConneSx="ngForm" (ngSubmit)="update_profil()">
+                        <input type="text" id="avatar" name="avatarupdate" class="form-control" [(ngModel)]="avatarupdate" placeholder="Entrez le lien d'un avatar">
+                        <button type="submit" class="btn btn-success float-right"> Update avatar </button>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+        <!--Historique -->
+        <div style="text-align: center;">
+            <h2><u>Historique</u></h2>
+        </div>
+        <div class="table-responsive">
+            <table class="table" style="text-align: center;">
+                <thead>
+                    <tr>
+                        <th scope="col">N° Quiz</th>
+                        <th scope="col">Date de jeux</th>
+                        <th scope="col">Niveau de jeux</th>
+                        <th scope="col">Réponses corrèctes</th>
+                        <th scope="col">Temps écoulé</th>
+                        <th scope="col">Score</th>
+                    </tr>
+                </thead>
+                <tbody style="text-align: center;">
+                    <tr *ngFor="let row of historique; let i=index">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{row['date_jeu'] | date: 'dd-MM-yyyy HH:mm'}}</td>
+                        <td>{{row['niveau_jeu']}}</td>
+                        <td>{{row['nb_reponses_corr']}}</td>
+                        <td>{{row['temps']}} s</td>
+                        <td>{{row['score']}}</td>
+                    </tr>
+                    <tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>

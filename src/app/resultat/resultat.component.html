@@ -1,0 +1,57 @@
+<div class="border border-3">
+    <div style="text-align: center;">
+        <h2><u> Votre resultats de quiz</u></h2>
+    </div>
+    <div class="row">
+        <div class="col fs-5" style="text-align: center;">
+            <strong> Joueur</strong> : {{quizService.getPlayer()}}
+        </div>
+        <div class="col fs-5" style="text-align: center;">
+            <strong> Réponses corrèctes </strong>: {{quizService.correctAnswerCount}}/5
+        </div>
+        <div class="col fs-5" style="text-align: center;">
+            <strong>Temps écoulé </strong>: {{quizService.displayTimeElapsed()}} s
+        </div>
+        <div class="col fs-5" style="text-align: center;">
+            <strong> Score</strong> : {{quizService.score}}
+        </div>
+    </div>
+</div>
+<div class="btn-group" role="group" aria-label="Basic mixed styles example">
+    <button class="btn btn-primary" (click)="saveResInHistorique(user_id, date_jeu, level, correctAnswers, timeElapsed, score)">Enregistrer</button>
+    <button class="btn btn-secondary" (click)="restartQuiz()"> Rejouer</button>
+</div>
+
+<div style="text-align: center;">
+    <h2><u>Questions avec les réponses corrèctes</u></h2>
+</div>
+<div class="table-responsive">
+    <table class="table table-light" style="text-align: center;">
+        <thead>
+            <tr>
+                <th scope="col">N° Question</th>
+                <th scope="col">Questions</th>
+                <th scope="col">Choix</th>
+            </tr>
+        </thead>
+        <tbody style="text-align: left;">
+            <tr *ngFor="let qn of quizService.quiz; let i=index">
+                <th scope="row">{{i+1}}</th>
+                <td>{{qn.question}}</td>
+                <td>
+                    <a class="list-group-item" *ngFor="let proposition of qn.propositions;
+           let j=index">
+              {{proposition}}
+              <span class="badge" *ngIf="quizService.correct.includes(qn.id) && quizService.choix[i] == j">
+                <i  style="color: green; size: 20px; text-align: right;">Correct</i>
+              </span>
+              <span class="badge badge-lg" *ngIf="!quizService.correct.includes(qn.id) && quizService.choix[i] == j">
+                <i  style="color: red; text-align: right; " >Incorrect</i>
+              </span>
+          </a>
+                </td>
+            </tr>
+            <tr>
+        </tbody>
+    </table>
+</div>

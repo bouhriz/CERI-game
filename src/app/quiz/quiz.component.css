@@ -1,0 +1,7 @@
+a:hover{
+    cursor: pointer;
+}
+
+select:hover{
+    cursor: pointer;
+}

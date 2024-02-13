@@ -1,0 +1,50 @@
+<div *ngIf="showThemes">
+
+    <h1 style="text-align: center;">The CERIGame</h1>
+
+    <h4>Choisissez votre Thème de quiz :</h4>
+
+    <select class="form-select form-select-lg mb-4 form-control" aria-label="Default select example" (change)="choixTheme($event.target.value)">
+        <option *ngFor= "let theme of quizService.themes" value="{{theme}}" >{{theme}}</option>
+    </select>
+
+    <h4>Choisissez votre niveau de jeux :</h4>
+
+    <select class="form-select form-select-lg mb-4 form-control" aria-label="Default select example" (change)="selectLevel($event.target.value)">
+    <option value="1" >Facile</option>
+    <option value="2" >Intermédiaire</option>
+        <option value="3" >Difficile</option>
+
+        
+    </select>
+    <div class="text-center">
+        <button type="button" class="btn btn-primary btn-block col-md-6 col-md-offset-3 " (click)="selectTheme(quizService.theme,quizService.level)">Start the Quiz</button>
+    </div>
+</div>
+
+<div class="container row" *ngIf="quizService.quiz && !showThemes">
+
+    <h1 style="text-align: center;">Quiz</h1>
+
+    <span>Temps écoulé : {{quizService.displayTimeElapsed()}}</span>
+
+    <div class="progress">
+        <div class="progress-bar progress-bar-success progress-bar-striped" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" [style.width.%]="(quizService.questionProgress)*20">
+            <span class="sr-only">{{quizService.questionProgress*20}}%</span>
+        </div>
+    </div>
+
+    <div class="panel panel-primary">
+        <div class="panel-body">
+            <div class="py-2 h5"><b>Q.{{quizService.questionProgress+1}} : {{quizService.quiz[quizService.questionProgress].question}}</b></div>
+        </div>
+        <div class="list-group">
+            <a class="list-group-item" *ngFor="let proposition of quizService.quiz[quizService.questionProgress].propositions;
+                     let i = index" (click)="selectAnswer(quizService.quiz[quizService.questionProgress].id , i)">
+                        {{proposition}}
+                    </a>
+
+        </div>
+    </div>
+
+</div>
